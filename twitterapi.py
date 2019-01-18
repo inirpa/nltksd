@@ -31,10 +31,10 @@ class listener(StreamListener):
 		return True
 
     def on_error(self, status):
-        print(status)
+        print("error code" + status)
 
 auth = OAuthHandler(ckey, csecret)
 auth.set_access_token(atoken, asecret)
 
 twitterStream = Stream(auth, listener())
-twitterStream.filter(track=["happy"], languages=['nl'])
+twitterStream.filter(track=["iphone"])

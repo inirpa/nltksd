@@ -26,12 +26,21 @@ def find_features(document):
 
     return features
 
-print((find_features(movie_reviews.words('neg/cv000_29416.txt'))))
+# print((find_features(movie_reviews.words('neg/cv000_29416.txt'))))
 
 featuresets = [(find_features(rev), category) for (rev, category) in documents]
+training_set = featuresets[:1900]
+testing_set = featuresets[1900:]
+classifier = nltk.NaiveBayesClassifier.train(training_set)
+classifier.show_most_informative_features(15)
 
+# Example_Text = "i do not admire "
+# featurized_doc = {c:True for c in Example_Text.split()}
+# tagged_label = classifier.classify(featurized_doc)
+# print(tagged_label)
 
-save_classifier = open("featuresets.pickle","wb")
+save_classifier = open("pickled_algos/featuresets.pickle","wb")
 pickle.dump(featuresets, save_classifier)
 save_classifier.close()
+
 
